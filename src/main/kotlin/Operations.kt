@@ -41,8 +41,9 @@ fun main() {
 //    var l = z.length
 //    println(l)
     for (item in z) {
-        print(((item.toInt() - 97 + s) % 26 + 97).toChar())
+        print(((item.toInt() - 97 + s + 26) % 26 + 97).toChar())
     }
+//    println(-3%26)
     // ДЗ: Дописать программу шифра Цезаря для отрицательных шагов
     // когда s = -1,-2,... a -> z, y
 }
