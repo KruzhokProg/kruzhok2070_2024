@@ -40,17 +40,32 @@ package org.example
 //}
 
 // Перечисление степеней ФСУ
-fun main() {
-    print("Введите число n: ")
-    var n = readln().toInt() // 4
-    for (i in 0..n) { // i = 0, 1, 2
-        println("${n-i} $i") // 4 0, 3 1, 2 2,...
-    }
-}
+//fun main() {
+//    print("Введите число n: ")
+//    var n = readln().toInt() // 4
+//    for (i in 0..n) { // i = 0, 1, 2
+//        println("${n-i} $i") // 4 0, 3 1, 2 2,...
+//    }
+//}
 //4 0
 //3 1
 
-
+// Последовательность фиббоначи
+//  1 1 2 3 5 8 ...
+fun main() {
+    var v1 = 1
+    var v2 = 1
+    var v3 = 1
+    var next = 3
+    print("1 1 1 ")
+    for (i in 1..10) {
+        next = v1 + v2 + v3
+        v1 = v2
+        v2 = v3
+        v3 = next
+        print("$next ")
+    }
+}
 
 
 
