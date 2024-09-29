@@ -43,13 +43,26 @@ package org.example
 //    println(1/(1-x))
 //}
 
+//fun main() {
+//    var x = readln().toDouble()
+//    val n = 100
+//    var s = 0.0
+//    for (i in 0..n-1) { // i=0..9
+//        s += (i+1)*Math.pow(x, i*1.0)
+//    }
+//    println(s)
+//    println(1/Math.pow(1-x, 2.0))
+//}
+
 fun main() {
     var x = readln().toDouble()
     val n = 100
     var s = 0.0
-    for (i in 0..n-1) { // i=0..9
-        s += (i+1)*Math.pow(x, i*1.0)
+    var koef = 1
+    for (i in 0..n-1) { // i=0, 1, 2
+        s += koef*Math.pow(x, i*1.0)
+        koef = koef + (i+2) // 6 + 4 = 10
     }
     println(s)
-    println(1/Math.pow(1-x, 2.0))
+    println(1/Math.pow(1-x, 3.0))
 }
