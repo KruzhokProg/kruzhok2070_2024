@@ -32,13 +32,24 @@ package org.example
 //}
 
 // разложение в ряд
+//fun main() {
+//    var x = readln().toDouble()
+//    val n = 100
+//    var s = 0.0
+//    for (i in 0..n-1) { // i=0..9
+//        s += Math.pow(x, i*1.0)
+//    }
+//    println(s)
+//    println(1/(1-x))
+//}
+
 fun main() {
     var x = readln().toDouble()
     val n = 100
     var s = 0.0
     for (i in 0..n-1) { // i=0..9
-        s += Math.pow(x, i*1.0)
+        s += (i+1)*Math.pow(x, i*1.0)
     }
     println(s)
-    println(1/(1-x))
+    println(1/Math.pow(1-x, 2.0))
 }
