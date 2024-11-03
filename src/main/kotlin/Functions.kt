@@ -32,13 +32,12 @@ fun predmax(a: Int, b: Int, c: Int): Int {
 }
 
 fun distance(x1: Double, y1: Double, x2: Double, y2: Double): Double {
-    val res = Math.sqrt(((x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2)).toDouble())
-    return res
+    return Math.sqrt(((x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2)))
 }
 
-fun checkBelongToCircle(x: Double, y: Double, r: Double = 1): Boolean {
+fun checkBelongToCircle(x: Double, y: Double, r: Double = 1.0, shiftY: Double = 0.0, shiftX: Double = 0.0): Boolean {
     var res: Boolean
-    if (distance(x, y, 0.0, 0.0) <= r) {
+    if (distance(x, y, shiftX, shiftY) <= r) {
         res = true
     } else {
         res = false
@@ -63,8 +62,48 @@ fun checkBelongToArea(x: Double, y: Double): Boolean {
     }
 }
 
+fun checkBelongToHalfCircleHalfRhomb(x: Double, y: Double): Boolean {
+    if (checkBelongToCircle(x, y) && y >= 0
+        || checkBelongToRhomb(x, y) && y <= 0) {
+        return true
+    } else {
+        return false
+    }
+}
+
+fun checkBelongToArea2(x: Double, y: Double): Boolean {
+    if (y >= 0 && ( checkBelongToCircle(x, y) && x <= 0
+                && !checkBelongToRhomb(x, y) || x >= 0 && checkBelongToRhomb(x, y))) {
+        return true
+    } else {
+        return false
+    }
+}
+
+fun checkBelongToArea3(x: Double, y: Double): Boolean {
+    if ( y >= 0 && x <= 0 && checkBelongToCircle(x, y, shiftY = 0.5) && checkBelongToRhomb(x, y)
+        || y < 0 && x >= 0 && !checkBelongToCircle(x, y, shiftY = 0.5) && checkBelongToRhomb(x, y)) {
+        return true
+    } else {
+        return false
+    }
+}
+
+fun checkBelongToArea4(x: Double, y: Double): Boolean {
+    if (!(x >= 0 && y >= 0) && checkBelongToCircle(x, y, shiftY = 0.5, shiftX = 0.5)
+        && !checkBelongToRhomb(x, y)
+        || x <= 0 && y <= 0 && checkBelongToCircle(x, y, shiftY = 0.5, shiftX = 0.5)
+        || x >= 0 && y < 0 && !checkBelongToCircle(x, y, shiftY = 0.5, shiftX = 0.5)
+        && checkBelongToRhomb(x, y)  ) {
+        return true
+    } else {
+        return false
+    }
+}
+
 fun main() {
-    println(checkBelongToRhomb(0.1, 1.1))
+    println(checkBelongToArea3(0.5, 0.5))
+//    println(checkBelongToRhomb(0.1, 1.1))
 //    println(checkBelongToCircle(1, 1, 3, 13, 5))
 //    println(distance(1, 3, 6, 1))
 //    println(distance(2, 4, 5, 7))
