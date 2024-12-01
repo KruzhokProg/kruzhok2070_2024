@@ -1,6 +1,8 @@
 package org.example
 
 import kotlin.math.abs
+import kotlin.math.max
+import kotlin.math.sign
 import kotlin.math.sqrt
 
 fun main() {
@@ -112,21 +114,109 @@ fun main() {
 //    numbers2.forEach { print("$it ") }
 
     // посчитать сумму между минимальным и максимальными элементами
-    val numbers2 = arrayOf(-49, 21, -3, 84, 121, 600)
-    val imax = numbers2.indexOf(numbers2.max())
-    val imin = numbers2.indexOf(numbers2.min())
+//    val numbers2 = arrayOf(-49, 21, -3, 84, 121, 600)
+//    val imax = numbers2.indexOf(numbers2.max())
+//    val imin = numbers2.indexOf(numbers2.min())
 //    var sum = 0
 //    for (i in imin+1..imax-1) {
 //        sum += numbers2[i]
 //    }
 //    println(sum)
-    val res = numbers2.filterIndexed { index, number ->
-        index in (imin + 1)..<imax
-    }.sum()
-    println(res)
+//    val res = numbers2.filterIndexed { index, number ->
+//        index in (imin + 1)..<imax
+//    }.sum()
+//    println(res)
 
 //    ДЗ:
 //    1. Есть ли в массиве одинаковые числа
 //    2. Удалить повторяющиеся элементы из массива
 //    3. Найти два максимальных элемента массива
+
+//    1. Первый способ (полный перебор)
+//    val numbers2 = arrayOf(-49, 21, -3, 84, 121, 600, 84)
+//    val count = numbers2.size
+//    for (i in 0 until count) {
+//        val elementToCheck = numbers2[i]
+//        for (j in i+1 until count) {
+//            if (elementToCheck == numbers2[j]) {
+//                println("Есть одинаковое число $elementToCheck")
+//                return
+//            }
+//        }
+//    }
+//    println("Нет одинаковых элементов")
+
+//    2. Через сортировку
+//    val numbers2 = arrayOf(-49, 21, -3, 84, 121, 600, 84)
+//    val count = numbers2.size
+//    numbers2.sort()
+//    println(numbers2.joinToString(separator = " "))
+//    for (i in 0 until count) {
+//        if (numbers2[i] == numbers2[i+1]) {
+//            println("Есть одинаковое число ${numbers2[i]}")
+//            return
+//        }
+//    }
+
+//    3.
+//    val numbers2 = arrayOf(600, 600, 600, 600, 600, 600, 600)
+//    val max = numbers2.max()
+//    val predmax = numbers2.filter { it != max }.lastOrNull()
+//    println("max: $max\npredmax: $predmax")
+
+//    2. Первый способ (в лоб - примитивный подход)
+//    val numbers2 = arrayOf(-49, 21, -3, 84, 21, 600, 84)
+//    val listWithoutDuplicates: MutableList<Int> = mutableListOf()
+//    val count = numbers2.size
+//    numbers2.sort()
+//    for (i in 0 until count - 1) {
+//        if (numbers2[i] == numbers2[i + 1]) {
+//            listWithoutDuplicates.add(numbers2[i])
+//        }
+//    }
+//    println(listWithoutDuplicates)
+//    val res = numbers2.filter { it !in listWithoutDuplicates }
+//    println(res)
+
+//    2. Через множество
+//    val numbers2 = arrayOf(-49, 21, -3, 84, 21, 600, 84)
+//    val res = numbers2.toSet()
+//    println(res)
+
+
+//    1. Найти в списке самую длинную возрастающую подпоследовательность
+//    val num = arrayOf(-49, 21, 84, 21, 60, 84, 100, 200, 300, 1, 2, 3, 4, 5)
+//    val count = num.size
+//    val lastIndex = count - 1
+//    var i: Int = 0
+//    var countMax = 1
+//    while (i < lastIndex) {
+//        var cur = i
+//        while (cur < lastIndex && num[cur] < num[++cur]) { }
+//        if (cur == lastIndex) cur++
+//        countMax = max(countMax, cur - i)
+//        i = cur
+//    }
+//    println(countMax)
+
+    // 2. Найти индексы элементов, которые дают нужную сумму
+    val num = arrayOf(-49, 21, -3, 84, 21, 600, 84)
+    val target = 551
+    // ответ: [1, 6]
+    num.sort()
+    var i = 0
+    var j = num.size - 1
+    while (i < j) {
+        val sum = num[i] + num[j]
+        if (sum > target) {
+            j--
+        } else if (sum < target) {
+            i++
+        } else {
+            println("${num[i]} ${num[j]}")
+            return
+        }
+    }
+
+//    ДЗ Найти три числа в массиве = target
 }
