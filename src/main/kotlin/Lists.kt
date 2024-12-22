@@ -246,10 +246,23 @@ fun main() {
 //    Incrementing by one gives 9 + 1 = 10.
 //    Thus, the result should be [1,0].
 
-    val input1 = arrayOf(1, 9, 9)
-    val input2 = arrayOf(9, 9, 9, 9)
-    val maxArraySize = max(input1.size, input2.size)
-    val minArraySize = min(input1.size, input2.size)
+    val input1 = arrayOf(9, 9, 9)
+    val input2 = arrayOf(1, 1)
+    val maxArray: Array<Int>
+    val minArray: Array<Int>
+    val maxArraySize: Int
+    val minArraySize: Int
+    if (input1.size > input2.size) {
+        maxArray = input1
+        minArray = input2
+        maxArraySize = input1.size
+        minArraySize = input2.size
+    } else {
+        maxArray = input2
+        minArray = input1
+        maxArraySize = input2.size
+        minArraySize = input1.size
+    }
     val output = Array(maxArraySize + 1) { 0 }
     val lastMaxIndex = maxArraySize - 1
     val lastMinIndex = minArraySize - 1
@@ -258,10 +271,10 @@ fun main() {
     var i = lastMaxIndex
     var j = lastMinIndex
     while (j >= 0 || (i >= 0 && carry != 0)) {
-        if (j < 0 && carry != 0) {
-            sum = input2[i] + carry
+        if (i >= 0 && j >= 0) {
+            sum = maxArray[i] + minArray[j] + carry
         } else {
-            sum = input1[j] + input2[i] + carry
+            sum = maxArray[i] + carry
         }
         output[i + 1] = sum % 10
         carry = sum / 10
@@ -271,6 +284,7 @@ fun main() {
     output[i + 1] = carry
     println(output.joinToString(separator = " "))
     //  ДЗ: Учесть случай одинаковых размеров массивов
+
 //    2. Search Insert Position
 //    Given a sorted array of distinct integers and a target value, return the index if the target is found.
 //    If not, return the index where it would be if it were inserted in order.
@@ -287,4 +301,7 @@ fun main() {
 //
 //    Input: nums = [1,3,5,6], target = 7
 //    Output: 4
+
+//    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, ..., 100 ]
+//    target = 99
 }
