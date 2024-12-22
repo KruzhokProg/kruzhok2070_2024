@@ -200,23 +200,23 @@ fun main() {
 //    println(countMax)
 
     // 2. Найти индексы элементов, которые дают нужную сумму
-    val num = arrayOf(-49, 21, -3, 84, 21, 600, 84)
-    val target = 551
-    // ответ: [1, 6]
-    num.sort()
-    var i = 0
-    var j = num.size - 1
-    while (i < j) {
-        val sum = num[i] + num[j]
-        if (sum > target) {
-            j--
-        } else if (sum < target) {
-            i++
-        } else {
-            println("${num[i]} ${num[j]}")
-            return
-        }
-    }
+//    val num = arrayOf(-49, 21, -3, 84, 21, 600, 84)
+//    val target = 551
+//    // ответ: [1, 6]
+//    num.sort()
+//    var i = 0
+//    var j = num.size - 1
+//    while (i < j) {
+//        val sum = num[i] + num[j]
+//        if (sum > target) {
+//            j--
+//        } else if (sum < target) {
+//            i++
+//        } else {
+//            println("${num[i]} ${num[j]}")
+//            return
+//        }
+//    }
 
 //    ДЗ Найти три числа в массиве = target
 
@@ -248,6 +248,23 @@ fun main() {
 //    Explanation: The array represents the integer 9.
 //    Incrementing by one gives 9 + 1 = 10.
 //    Thus, the result should be [1,0].
+
+    val input = arrayOf(9, 9)
+    val number = 8
+    val output = Array(input.size + 1) { 0 }
+    val lastIndex = input.size - 1
+    var carry = 0
+    var sum = number
+    var i = lastIndex
+    while (i >= 0) {
+        sum += input[i] + carry
+        output[i + 1] = sum % 10
+        carry = sum / 10
+        sum = 0
+        i--
+    }
+    output[i + 1] = carry
+    println(output.joinToString(separator = " "))
 
 //    2. Search Insert Position
 //    Given a sorted array of distinct integers and a target value, return the index if the target is found.
