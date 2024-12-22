@@ -1,9 +1,6 @@
 package org.example
 
-import kotlin.math.abs
-import kotlin.math.max
-import kotlin.math.sign
-import kotlin.math.sqrt
+import kotlin.math.*
 
 fun main() {
 //    val numbers = arrayOf(10, 21, -3, 84, 105, 6)
@@ -249,23 +246,31 @@ fun main() {
 //    Incrementing by one gives 9 + 1 = 10.
 //    Thus, the result should be [1,0].
 
-    val input = arrayOf(9, 9)
-    val number = 8
-    val output = Array(input.size + 1) { 0 }
-    val lastIndex = input.size - 1
+    val input1 = arrayOf(1, 9, 9)
+    val input2 = arrayOf(9, 9, 9, 9)
+    val maxArraySize = max(input1.size, input2.size)
+    val minArraySize = min(input1.size, input2.size)
+    val output = Array(maxArraySize + 1) { 0 }
+    val lastMaxIndex = maxArraySize - 1
+    val lastMinIndex = minArraySize - 1
     var carry = 0
-    var sum = number
-    var i = lastIndex
-    while (i >= 0) {
-        sum += input[i] + carry
+    var sum = 0
+    var i = lastMaxIndex
+    var j = lastMinIndex
+    while (j >= 0 || (i >= 0 && carry != 0)) {
+        if (j < 0 && carry != 0) {
+            sum = input2[i] + carry
+        } else {
+            sum = input1[j] + input2[i] + carry
+        }
         output[i + 1] = sum % 10
         carry = sum / 10
-        sum = 0
         i--
+        j--
     }
     output[i + 1] = carry
     println(output.joinToString(separator = " "))
-
+    //  ДЗ: Учесть случай одинаковых размеров массивов
 //    2. Search Insert Position
 //    Given a sorted array of distinct integers and a target value, return the index if the target is found.
 //    If not, return the index where it would be if it were inserted in order.
