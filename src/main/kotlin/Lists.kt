@@ -219,4 +219,50 @@ fun main() {
     }
 
 //    ДЗ Найти три числа в массиве = target
+
+//    1. Plus One
+//    You are given a large integer represented as an integer array digits, where each digits[i] is the ith digit of the integer.
+//    The digits are ordered from most significant to least significant in left-to-right order.
+//    The large integer does not contain any leading 0's.
+//    Increment the large integer by one and return the resulting array of digits.
+
+//    Input: digits = [1,2,3]
+//    Output: [1,2,4]
+//    Explanation: The array represents the integer 123.
+//    Incrementing by one gives 123 + 1 = 124.
+//    Thus, the result should be [1,2,4].
+//     --------------------------------------
+//      byte - 1 байт -> 8 бит [-2^7...2^7-1] = [-128...127]
+//      int - n = 4 байта = 32 бита -> [-2^(n-1)...2^(n-1)-1]
+//      [-2^31...2^31-1]
+//      long - 8 байт = 64 бита -> [-2^63...2^63-1]
+//      N = 1000 -> long -> 8000 байт = 7.8 Кб
+//      N = 1000_000 -> long -> 8_000_000 байт = 7.6 Мб
+//      123456789 -> [1,2,3,4,5,6,7,8,9] -> 9 байт
+//      12 -> [1,2] -> 2 байт
+//      [1,2] + 7 -> [1, 9]
+//      [1,2] + 9 -> [2,1]
+//    --------------------------------------
+//    Input: digits = [9]
+//    Output: [1,0]
+//    Explanation: The array represents the integer 9.
+//    Incrementing by one gives 9 + 1 = 10.
+//    Thus, the result should be [1,0].
+
+//    2. Search Insert Position
+//    Given a sorted array of distinct integers and a target value, return the index if the target is found.
+//    If not, return the index where it would be if it were inserted in order.
+//    You must write an algorithm with O(log n) runtime complexity.
+//    Example 1:
+//
+//    Input: nums = [1,3,5,6], target = 5
+//    Output: 2
+//    Example 2:
+//
+//    Input: nums = [1,3,5,6], target = 2
+//    Output: 1
+//    Example 3:
+//
+//    Input: nums = [1,3,5,6], target = 7
+//    Output: 4
 }
